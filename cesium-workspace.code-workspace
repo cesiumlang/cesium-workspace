@@ -38,6 +38,8 @@
       "cesiumlang.org/quartz_repo/.github/workflows/**": true,
       "cesiumlang.org/src/quartz/**": true,
       "cesiumlang.org/build/**": true,
+      // LLVM is built from, never edited: keep it out of the explorer
+      "devkits/llvm-project": true,
       "devkits/work/**": true,
       "devkits/dist/**": true,
     },
