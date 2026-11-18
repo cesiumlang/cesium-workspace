@@ -1,0 +1,15 @@
+[submodule "cesium-src"]
+	path = cesium-src
+	url = https://github.com/cesiumlang/cesium.git
+[submodule "devkits"]
+	path = devkits
+	url = https://github.com/cesiumlang/devkits.git
+[submodule "vscode-cesium"]
+	path = vscode-cesium
+	url = https://github.com/cesiumlang/vscode-cesium.git
+[submodule "dot-github"]
+	path = dot-github
+	url = https://github.com/cesiumlang/.github.git
+[submodule "cesiumlang.org"]
+	path = cesiumlang.org
+	url = https://github.com/cesiumlang/cesiumlang.org.git

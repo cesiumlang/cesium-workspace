@@ -1,0 +1,8 @@
+/.claude/
+.local-gitignore
+
+# notes of a Claude Code session for the next one; not for the repository
+/CLAUDE.local.md
+
+# machine-specific editor settings (absolute paths)
+/.vscode/settings.json

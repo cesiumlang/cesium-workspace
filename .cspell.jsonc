@@ -1,0 +1,32 @@
+{
+  "version": "0.2",
+  "ignorePaths": [
+    ".cspell.json*",
+    ".git/**",
+    "*.code-workspace",
+    ".gitignore",
+    ".local-gitignore",
+    // submodules: each has its own repository, rules and dictionary
+    "cesium-src/**",
+    "cesiumlang.org/**",
+    "devkits/**",
+    "dot-github/**",
+    "vscode-cesium/**",
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-words",
+      "path": ".vscode/ltex.dictionary.en-US.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": [
+    "bash",
+    "win32",
+    "scientific-terms-us",
+    "project-words",
+  ],
+  "allowCompoundWords": true,
+  "ignoreWords": [],
+  "ignoreRegExpList": [],
+}

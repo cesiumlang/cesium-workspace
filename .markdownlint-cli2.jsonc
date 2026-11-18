@@ -1,0 +1,10 @@
+{
+  "ignores": [
+    // submodules: each has its own repository and rules
+    "cesium-src/**",
+    "cesiumlang.org/**",
+    "devkits/**",
+    "dot-github/**",
+    "vscode-cesium/**"
+  ]
+}
