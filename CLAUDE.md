@@ -20,7 +20,9 @@ This repository is the parent of the Cesium repositories. It has no code of its 
 ## How work is done here
 
 - GitHub issues are the knowledge base. Before deciding anything about the language or the compiler, look for the issue that decides it (label `decision`; `design` and `audit` are open questions) and cite it. List anything decided without such guidance under "Choices made without guidance" in the pull request. Do not close or decide open design questions.
-- Every repository has `main` and `dev`. Work goes to `dev` through pull requests; `dev` goes to `main` through a pull request that Randy reviews.
+- Every repository has `main` and `dev`. Work goes to `dev`; `dev` goes to `main` through a pull request.
+- A repository with a tagged release (check its tags; devkits is the first) takes all work through pull requests, nothing is pushed to its `main` directly, and Randy reviews its `dev` to `main` pull request. Until a repository has a tagged release, its `dev` to `main` pull request needs no review.
+- Whatever needs a design decision or Randy's input is not settled here: label the issue `question` (or `design` in cesiumlang/cesium), assign it to Randy and leave it open. Recommend an answer only where there is one unambiguous or obvious one.
 - Each submodule here records the `dev` head of its repository. After a merge to a submodule's `dev`, move the pointer here in the same piece of work.
 - A setting or tool requirement added to a submodule's `*.code-workspace` or `.envrc` is repeated in `cesium-workspace.code-workspace` and `.envrc` here, with its path. LTeX reads only the dictionary of the workspace root, so words added to a submodule's `.vscode/ltex.dictionary.en-US.txt` go into the one here too.
 - The website does not have the compiler as a submodule. Its `build.js` finds the compiler in `../cesium-src`, which is this layout.
