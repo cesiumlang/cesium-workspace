@@ -104,6 +104,17 @@
       "node_modules",
       "llvm-project",
     ],
+    // and Pylance need not index its thousands of Python files. Setting this
+    // replaces Pylance's defaults, which are the first three entries.
+    "python.analysis.exclude": [
+      "**/node_modules",
+      "**/__pycache__",
+      "**/.*",
+      "devkits/llvm-project",
+      "devkits/work",
+      "devkits/dist",
+      "cesiumlang.org/build",
+    ],
 
     // cesiumlang.org
     "foam.openDailyNote.onStartup": false,
