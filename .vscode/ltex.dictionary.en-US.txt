@@ -42,6 +42,7 @@ dynlib
 EBNF
 Enums
 envrc
+esbuild
 extsb
 extsh
 extsw
@@ -178,6 +179,7 @@ Variadic
 variadics
 vmovups
 vscode-tmgrammar-test
+vscodeignore
 vsix
 VSIX
 WebAssembly
@@ -189,6 +191,7 @@ WINSYS
 xcopy
 YELLOWTEXT
 yyjson
+zcsls
 zfls
 Zig
 zig-build
