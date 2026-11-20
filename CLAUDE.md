@@ -5,7 +5,7 @@ This repository is the parent of the Cesium repositories. It has no code of its 
 - `cesium-src/` is cesiumlang/cesium, the compiler. Its submodules: `buildtools/` (cesium-buildtools), `.cspell/cesium/` (cspell-cesium).
 - `cesiumlang.org/` is the website. Its submodules: `quartz_repo/` (Quartz, locked), `grammar/`, `.cspell/cesium/`.
 - `devkits/` builds the devkit. Its submodules: `qbe/`, `llvm-project/`.
-- `vscode-cesium/` is the VS Code extension (no code yet).
+- `vscode-cesium/` is the VS Code extension and the temporary language server `zcsls` (Zig). Its submodule: `grammar/`.
 - `dot-github/` is cesiumlang/.github, the organization profile.
 
 ## Rules
