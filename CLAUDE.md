@@ -1,4 +1,4 @@
-# cesium-workspace
+# Cesium Workspace
 
 This repository is the parent of the Cesium repositories. It has no code of its own. Its submodules, side by side:
 
@@ -20,6 +20,7 @@ This repository is the parent of the Cesium repositories. It has no code of its 
 ## How work is done here
 
 - GitHub issues are the knowledge base. Before deciding anything about the language or the compiler, look for the issue that decides it (label `decision`; `design` and `audit` are open questions) and cite it. List anything decided without such guidance under "Choices made without guidance" in the pull request. Do not close or decide open design questions.
+- Randy's uncommitted edits to `CLAUDE.md`, the LTeX dictionary and false-positive files, and readmes, in any repository of this workspace, go into the next commit there; they are usually small fixes. He says so when he is writing something larger that should be left alone until he is done.
 - The roadmap, cesium-workspace#12, is the priority order of all work across the repositories. Add every new issue to it when you file it, at its place in that order (not at the end), tick items as they close (with the pull request or the date of the decision), and edit its text when the order changes.
 - Every repository has `main` and `dev`. Work goes to `dev`; `dev` goes to `main` through a pull request.
 - A repository with a tagged release (check its tags; devkits is the first) takes all work through pull requests, nothing is pushed to its `main` directly, and Randy reviews its `dev` to `main` pull request. Until a repository has a tagged release, its `dev` to `main` pull request needs no review.
