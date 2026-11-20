@@ -20,6 +20,7 @@ This repository is the parent of the Cesium repositories. It has no code of its 
 ## How work is done here
 
 - GitHub issues are the knowledge base. Before deciding anything about the language or the compiler, look for the issue that decides it (label `decision`; `design` and `audit` are open questions) and cite it. List anything decided without such guidance under "Choices made without guidance" in the pull request. Do not close or decide open design questions.
+- The roadmap, cesium-workspace#12, is the priority order of all work across the repositories. Add every new issue to it when you file it, at its place in that order (not at the end), tick items as they close (with the pull request or the date of the decision), and edit its text when the order changes.
 - Every repository has `main` and `dev`. Work goes to `dev`; `dev` goes to `main` through a pull request.
 - A repository with a tagged release (check its tags; devkits is the first) takes all work through pull requests, nothing is pushed to its `main` directly, and Randy reviews its `dev` to `main` pull request. Until a repository has a tagged release, its `dev` to `main` pull request needs no review.
 - Whatever needs a design decision or Randy's input is not settled here: label the issue `question` (or `design` in cesiumlang/cesium), assign it to Randy and leave it open. Recommend an answer only where there is one unambiguous or obvious one.
