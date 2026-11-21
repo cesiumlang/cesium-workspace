@@ -1,6 +1,6 @@
 ---
 name: roadmap-project
-description: Keep the Cesium Roadmap GitHub Project in order - add a newly filed issue at its place in the priority order with its Track, set Status, link blocked-by dependencies, add draft items, list what comes next. Use after filing an issue, when work on an item starts or ends, or to find the next item to work.
+description: Keep the Cesium Roadmap GitHub Project in order - add a newly filed issue at its place in the priority order with its Track, set Status, link blocked-by dependencies, list what comes next. Use after filing an issue, when work on an item starts or ends, or to find the next item to work.
 ---
 
 # The Cesium Roadmap Project
