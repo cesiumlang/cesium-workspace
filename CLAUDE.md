@@ -14,6 +14,7 @@ This repository is the parent of the Cesium repositories. It has no code of its 
 - Do not redirect output to NUL (`2>nul`, `> NUL`); it does not work as expected on Windows. Let commands print.
 - Indentation is two spaces (Zig: four, as `zig fmt` writes). Language-specific rules are in `.claude/rules/` and load with the files they cover.
 - Builds use the Zig of the Cesium devkit (`cesium-src/.devkit`, `python tools/fetch-devkit.py`), not the VS Code extension's Zig.
+- Other external tools come from `cesium-src/buildtools` (`buildtools.bat`), so a developer needs nothing preinstalled: the Vulkan SDK, Node.js, the tree-sitter CLI, Qt. Code uses those copies (the buildtools Vulkan SDK, never a system-wide one, which is left alone). A new tool is added there as a pinned, checked download.
 - Disk space is limited: no large downloads in the background (a test VS Code, toolchains, archives; CI does those); few Git worktrees, inside `C:\cesium`, removed when done; delete branches once merged, keeping only `main` and `dev`.
 
 ## How work is done here

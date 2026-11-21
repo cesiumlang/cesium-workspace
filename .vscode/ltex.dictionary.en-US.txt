@@ -91,6 +91,7 @@ lstack
 lunarg
 mac
 macdeployqt
+MAINT
 mingw
 Monomorphization
 msvc
@@ -171,6 +172,7 @@ tmgrammar
 toolchain
 tqdm
 tree-sitter-cpp
+TREESITTER
 trunc
 unistd
 usebackq
@@ -183,6 +185,8 @@ vscode-tmgrammar-test
 vscodeignore
 vsix
 VSIX
+vulkansdk
+Wbem
 WebAssembly
 win
 windarkmode
@@ -199,3 +203,12 @@ zig-build
 zig-devkits
 
 LTeX
+
+Vulkan
+Miniforge
+toolchains
+worktrees
+readmes
+semver
+VSCodium
+ovsx
