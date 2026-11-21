@@ -213,3 +213,5 @@ readmes
 semver
 VSCodium
 ovsx
+mkhl
+certutil

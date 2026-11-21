@@ -18,15 +18,15 @@ description: Keep the Cesium Roadmap GitHub Project in order - add a newly filed
 
 ## Script
 
-`scripts/project.py` does all of it. Run it with the Cesium Agent's token (its `draft` command exists but is not used):
+`scripts/project.sh` does all of it, with bash and `gh` alone. Run it with the Cesium Agent's token (its `draft` command exists but is not used):
 
 ```sh
 export GH_TOKEN="$(bash /c/scratch/github-apps/app-token.sh cesiumlang)"
-P=/c/cesium/workspace/.claude/skills/roadmap-project/scripts/project.py
-python -I $P list "Editor infrastructure"          # rows of one Track, in order
-python -I $P add cesium#90 "Real compiler" --after cesium#64
-python -I $P status "In Progress" vscode-cesium#7
-python -I $P block cesiumlang.org#30 cesium#90     # cesiumlang.org#30 is blocked by cesium#90
+P=/c/cesium/workspace/.claude/skills/roadmap-project/scripts/project.sh
+bash $P list "Editor infrastructure"     # rows of one Track, in order
+bash $P add cesium#90 "Real compiler" --after cesium#64
+bash $P status "In Progress" vscode-cesium#7
+bash $P block cesiumlang.org#30 cesium#90  # cesiumlang.org#30 is blocked by cesium#90
 ```
 
 `list` without a Track prints every row with its position. Decide the place by reading the neighbors in that Track: an item goes after what it depends on and before what depends on it.

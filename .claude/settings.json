@@ -9,5 +9,19 @@
   },
   "enabledPlugins": {
     "cesium@cesiumlang": true
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/direnv-env.sh\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
   }
 }

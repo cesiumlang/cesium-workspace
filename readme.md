@@ -47,7 +47,13 @@ git submodule foreach 'git checkout dev && git pull --ff-only'
 
 Open `cesium-workspace.code-workspace` in VS Code. It repeats the settings of the repositories' own workspace files with their paths, so this one workspace is enough.
 
-With [direnv](https://direnv.net) installed, `.envrc` loads the `.envrc` files of the compiler and the website: the Zig and QBE of the Cesium devkit on `PATH`, and the Node.js version of the website through [fnm](https://github.com/Schniz/fnm). Run `direnv allow` once.
+The `.envrc` files are the one source of the environment. `.envrc` here loads those of the compiler and the website: the Zig and QBE of the Cesium devkit, the compilers in `cesium-src/zig-out/bin`, `zcsls`, and the tools of `cesium-src/buildtools` (the Vulkan SDK, tree-sitter, Node.js, direnv). Node.js comes from buildtools, and from [fnm](https://github.com/Schniz/fnm) only where buildtools has none.
+
+The [direnv](https://direnv.net) program loads them; `cesium-src/buildtools/buildtools.bat` installs it. Run `direnv allow` here once, and again after `.envrc` changes. Then every consumer gets the same environment:
+
+- **Git Bash:** `source /c/cesium/workspace/cesium-src/buildtools/direnv-hook.sh` in `~/.bashrc` (the buildtools readme says why not direnv's own hook line).
+- **VS Code:** the direnv extension, which the workspace recommends; the buildtools readme says what it needs on Windows.
+- **Claude Code:** the `SessionStart` hook in `.claude/settings.json` (`.claude/hooks/direnv-env.sh`) writes the environment to `CLAUDE_ENV_FILE`, which every Bash command of the session runs first. It does nothing without direnv. Servers Claude Code starts itself, such as the agent plugin's `zcsls`, get the environment Claude Code was started in instead, so start it from a Git Bash with the hook or from VS Code with the extension.
 
 What each repository needs beyond that is in its own readme.
 
