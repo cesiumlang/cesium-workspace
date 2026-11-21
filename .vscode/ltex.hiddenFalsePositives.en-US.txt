@@ -4,3 +4,4 @@
 {"rule":"GITHUB","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q is cesiumlang/.github, the organization profile.\\E$"}
 {"rule":"GITHUB","sentence":"^\\Q\\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q is cesiumlang/.github, the organization profile and the shared workflows.\\E$"}
 {"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qdirenv itself: the path must end in \\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Atrapa-|Dummy\\+|Dummy's\\+)[0-9]+\\Q.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^[\\s\\S]*%\\[?[A-Za-z][\\s\\S]*$"}
