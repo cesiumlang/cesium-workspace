@@ -215,3 +215,4 @@ VSCodium
 ovsx
 mkhl
 certutil
+MSYS
