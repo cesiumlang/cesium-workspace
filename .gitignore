@@ -7,3 +7,6 @@
 
 # machine-specific editor settings (absolute paths)
 /.vscode/settings.json
+
+# Python caches of the agent scripts
+__pycache__/
