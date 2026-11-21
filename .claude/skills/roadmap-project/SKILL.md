@@ -11,8 +11,8 @@ description: Keep the Cesium Roadmap GitHub Project in order - add a newly filed
 - **Every new issue goes in when it is filed,** with its Track, at its place in that order, never at the end.
 - **Status:** Todo, In Progress, Done. Set In Progress when work starts; closing the issue sets Done.
 - **Real dependencies** are GitHub "blocked by" links between issues.
-- **Every plan is an issue,** even one far off or not yet scoped; the issue says what it waits on. No draft items (Randy, 2026-11-20): they are invisible in the repositories and cannot be referenced or linked.
-- The order changes when Randy says so, or when a decision changes what depends on what.
+- **Every plan is an issue,** even one far off or not yet scoped; the issue says what it waits on. No draft items (emanspeaks, 2026-11-20): they are invisible in the repositories and cannot be referenced or linked.
+- The order changes when emanspeaks says so, or when a decision changes what depends on what.
 
 **Tracks:** Editor infrastructure; Short answers; Design: S0 code; Design: direction and S1; Grammar, spec, stage 1; Real compiler; Docs follow-up; Later.
 
