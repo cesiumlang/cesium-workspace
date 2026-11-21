@@ -1,6 +1,6 @@
 ---
 name: github-as-cesium-agent
-description: How to act on GitHub in the cesiumlang repositories - issues, comments, pull requests, merges, commits and pushes as the Cesium Agent app, the cesium-bot fallback and its limits, pull request conventions. Use before any gh command, commit or push in this workspace.
+description: How to act on GitHub in the cesiumlang repositories - issues, comments, pull requests, merges, commits and pushes as the Cesium Agent app, the emanspeaks-bot fallback and its limits, pull request conventions. Use before any gh command, commit or push in this workspace.
 ---
 
 # Acting on GitHub as the Cesium Agent
@@ -27,7 +27,7 @@ The app can write contents, issues, pull requests, workflows, actions, administr
 - **Every issue has a type** (organization issue types, 2026-11-21): Task (work, including docs trackers), Bug, Feature, Design (an open language or toolchain design question), Question (an answer needed from emanspeaks), Decision (a decision record, until rewritten as a proposal). Set it when filing: `gh api -X PATCH repos/cesiumlang/<repo>/issues/<n> -f type=Task` (the app may set types, not create them).
 - **The owner is `emanspeaks`** (2026-11-20), never his first name: in issues, pull requests, comments, commit messages and files. Record his directions as "(emanspeaks, 2026-11-20)", without `@`; write `@emanspeaks` only to ask for his input or attention, since every `@` notifies him. `RandyOS`, `randyos-org`, `randyos-agent` and `randyos-bot` are names of other things; leave them.
 - `Closes #N` in a pull request into `dev` closes the issue when it merges (the shared workflow in cesiumlang/.github, called from each repository's `close-issues.yml`); inside code spans and code blocks it is ignored. Use `Part of #N` for partial work.
-- **Assignees say whose action is next** (emanspeaks, 2026-11-20). emanspeaks is assigned only where he must answer something or do something Claude cannot (a decision, a web-only step); everything whose next step is Claude's is assigned to `cesium-bot` (GitHub Apps cannot be assignees). When the next step changes hands, change the assignee. A mention or assignment from the app reaches emanspeaks.
+- **Assignees say whose action is next** (emanspeaks, 2026-11-20). emanspeaks is assigned only where he must answer something or do something Claude cannot (a decision, a web-only step); everything whose next step is Claude's is assigned to `emanspeaks-bot` (GitHub Apps cannot be assignees). When the next step changes hands, change the assignee. A mention or assignment from the app reaches emanspeaks.
 
 ## Merging
 
@@ -38,8 +38,8 @@ The app can write contents, issues, pull requests, workflows, actions, administr
 - In a repository with a tagged release (check its tags; devkits is the first), all work goes through pull requests, nothing is pushed to `main`, and emanspeaks merges the `dev` to `main` pull request, or it is merged on his word.
 - After a merge: delete the local branch (GitHub deletes the remote one), move the submodule pointer in the workspace, and tick or move the item on the Project (`roadmap-project` skill).
 
-## The cesium-bot fallback
+## The emanspeaks-bot fallback
 
-The machine user `cesium-bot` does only what the app cannot because it needs a user account: being assigned or asked for a review, its own profile, gists, notifications, endpoints that refuse app tokens. It is also the fallback when the app's token cannot be had. Run those `gh` commands with `GH_CONFIG_DIR` set to `../cesium-bot/gh` (next to the workspace checkout; the token is in the system keyring).
+The machine user `emanspeaks-bot` (named `cesium-bot` until emanspeaks renamed it on 2026-11-21; its email is `bot@emanspeaks.com`) does only what the app cannot because it needs a user account: being assigned or asked for a review, its own profile, gists, notifications, endpoints that refuse app tokens. It is also the fallback when the app's token cannot be had. Run those `gh` commands with `GH_CONFIG_DIR` set to `../cesium-bot/gh` (next to the workspace checkout; the token is in the system keyring).
 
-`cesium-bot` is emanspeaks's one machine account (GitHub Terms of Service, section B.3; a second one, `randyos-bot`, was suspended on 2026-11-19). Never create another machine account, never use `cesium-bot` outside the cesiumlang repositories, keep its activity to the work at hand (no bulk or repeated posting, no starring, following or watching, nothing in other people's repositories). If its sign-in reports the account suspended or flagged, stop using it, use plain `gh` and tell emanspeaks. If neither the app nor the bot works, say so and use plain `gh`, ending the text with "Posted by Claude at the request of emanspeaks".
+`emanspeaks-bot` is emanspeaks's one machine account (GitHub Terms of Service, section B.3; a second one, `randyos-bot`, was suspended on 2026-11-19). Never create another machine account, never use `emanspeaks-bot` outside the cesiumlang repositories, keep its activity to the work at hand (no bulk or repeated posting, no starring, following or watching, nothing in other people's repositories). If its sign-in reports the account suspended or flagged, stop using it, use plain `gh` and tell emanspeaks. If neither the app nor the bot works, say so and use plain `gh`, ending the text with "Posted by Claude at the request of emanspeaks".
