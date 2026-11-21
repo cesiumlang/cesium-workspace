@@ -32,6 +32,7 @@ The app can write contents, issues, pull requests, workflows, actions, administr
 ## Merging
 
 - The app merges pull requests into `dev`, and `dev` to `main` where the repository has no tagged release.
+- A pull request into `dev` is merged without waiting for CI (emanspeaks, 2026-11-21), as in zfls and rstd: no ruleset of a `dev` branch requires a check. Run the checks of the repository locally first and say in the pull request which were run; CI still runs on the pull request and on the push to `dev`, so look at that run afterwards and fix what it finds with a new pull request. `main` requires CI where the repository has it.
 - In a repository with a tagged release (check its tags; devkits is the first), all work goes through pull requests, nothing is pushed to `main`, and emanspeaks merges the `dev` to `main` pull request, or it is merged on his word.
 - After a merge: delete the local branch (GitHub deletes the remote one), move the submodule pointer in the workspace, and tick or move the item on the Project (`roadmap-project` skill).
 
