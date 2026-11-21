@@ -1,6 +1,6 @@
 ---
 name: roadmap-project
-description: Keep the Cesium Roadmap GitHub Project in order - add a newly filed issue at its place in the priority order with its Track, set Status, link blocked-by dependencies, list what comes next. Use after filing an issue, when work on an item starts or ends, or to find the next item to work.
+description: Keep the Cesium Roadmap GitHub Project in order - add a newly filed issue at its place in the priority order with its Track, set Status and Next action, link blocked-by dependencies, list what comes next. Use after filing an issue, when work on an item starts or ends, or to find the next item to work.
 ---
 
 # The Cesium Roadmap Project
@@ -30,3 +30,15 @@ bash $P block cesiumlang.org#30 cesium#90  # cesiumlang.org#30 is blocked by ces
 ```
 
 `list` without a Track prints every row with its position. Decide the place by reading the neighbors in that Track: an item goes after what it depends on and before what depends on it.
+
+## Next action
+
+The field **Next action** of the project says whose step is next on a row: `emanspeaks` or `agent`. It follows the assignee, and the label `agent` follows it (emanspeaks, 2026-11-21): a row assigned to emanspeaks is his; every other row that is not Done is the agent's and its issue carries the label `agent`.
+
+After changing an assignee, or after adding issues, bring the field and the labels in line for the whole project:
+
+```sh
+bash /c/cesium/workspace/.claude/skills/roadmap-project/scripts/next-action.sh cesiumlang cesiumlang
+```
+
+The script takes the organization and the folder of its app in `C:\scratch\github-apps\`; it does the same for the project skein Roadmap with `chasingdaylight chasingdaylight`. It can be run as often as wanted.
