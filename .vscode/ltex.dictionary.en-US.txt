@@ -1,3 +1,4 @@
+
 AArch64
 addrcontext
 ADDROF
@@ -9,6 +10,7 @@ Backlinks
 bigz
 buildtools
 ccache
+certutil
 cesium-buildtools
 CesiumDocCLI
 cesiumlang
@@ -88,15 +90,18 @@ loadw
 LOGTQDM
 LPAREN
 lstack
+LTeX
 lunarg
 mac
 macdeployqt
 MAINT
 mingw
+Miniforge
+mkhl
 Monomorphization
 msvc
-MSVC
 msvcrtd
+MSYS
 musl
 Namespacing
 nchars
@@ -136,6 +141,7 @@ qtpassword
 QTUSER
 randyos
 randyos-org
+readmes
 REDTEXT
 riscv
 RPAREN
@@ -144,6 +150,7 @@ savestate
 Schibsted
 scrutinising
 sdeq
+semver
 setlocal
 shadowable
 shiki
@@ -171,6 +178,7 @@ tjnz
 tline
 tmgrammar
 toolchain
+toolchains
 tqdm
 tree-sitter-cpp
 TREESITTER
@@ -184,8 +192,9 @@ variadics
 vmovups
 vscode-tmgrammar-test
 vscodeignore
+VSCodium
 vsix
-VSIX
+Vulkan
 vulkansdk
 Wbem
 WebAssembly
@@ -194,6 +203,7 @@ windarkmode
 windeployqt
 winify
 WINSYS
+worktrees
 xcopy
 YELLOWTEXT
 yyjson
@@ -202,16 +212,3 @@ zfls
 Zig
 zig-build
 zig-devkits
-
-LTeX
-
-Vulkan
-Miniforge
-toolchains
-worktrees
-readmes
-semver
-VSCodium
-ovsx
-mkhl
-certutil
