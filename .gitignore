@@ -1,4 +1,5 @@
-/.claude/
+/.claude/settings.local.json
+/.claude/**/*.local.*
 .local-gitignore
 
 # notes of a Claude Code session for the next one; not for the repository

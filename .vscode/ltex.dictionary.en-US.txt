@@ -158,6 +158,7 @@ strs
 submodule
 submodules
 subprocessing
+sysinfo
 sysv
 szenius
 tbase
