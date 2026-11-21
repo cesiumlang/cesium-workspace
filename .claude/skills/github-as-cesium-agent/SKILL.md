@@ -32,7 +32,9 @@ The app can write contents, issues, pull requests, workflows, actions, administr
 ## Merging
 
 - The app merges pull requests into `dev`, and `dev` to `main` where the repository has no tagged release.
-- A pull request into `dev` is merged without waiting for CI (emanspeaks, 2026-11-21), as in zfls and rstd: no ruleset of a `dev` branch requires a check. Run the checks of the repository locally first and say in the pull request which were run; CI still runs on the pull request and on the push to `dev`, so look at that run afterwards and fix what it finds with a new pull request. `main` requires CI where the repository has it.
+- A pull request into `dev` is merged at once (emanspeaks, 2026-11-21; as zfls and rstd): no ruleset of a `dev` branch requires a check, and CI does not start for pull requests into `dev` or pushes to it. Run the checks of the repository locally first and say in the pull request which were run.
+- CI runs on the standing pull request from `dev` to `main` of each repository that has CI (cesium, devkits, vscode-cesium, grammar): each merge into `dev` restarts its run. Look at it after merging; a red run means `dev` is broken, and is fixed with a new pull request into `dev`. To check one branch before merging, start the workflow by hand: `gh workflow run ci.yml --ref BRANCH`. `main` requires CI.
+- The standing pull request is merged by emanspeaks, or on his word; open a new one (`dev` to `main`, titled "dev to main") right after.
 - In a repository with a tagged release (check its tags; devkits is the first), all work goes through pull requests, nothing is pushed to `main`, and emanspeaks merges the `dev` to `main` pull request, or it is merged on his word.
 - After a merge: delete the local branch (GitHub deletes the remote one), move the submodule pointer in the workspace, and tick or move the item on the Project (`roadmap-project` skill).
 
