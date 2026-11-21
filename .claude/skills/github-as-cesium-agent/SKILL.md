@@ -25,7 +25,7 @@ The app can write contents, issues, pull requests, workflows, actions, administr
 - **Pull request bodies:** what and why, how it was checked, a "Choices made without guidance" section, ending with `🤖 Generated with [Claude Code](https://claude.com/claude-code)`. Write the body to a file and pass `--body-file`: heredocs in the Bash tool mangle backslashes and apostrophes.
 - **Issues and comments** end with `_Filed by Claude at Randy's request._` or `_Posted by Claude at Randy's request._`.
 - `Closes #N` in a pull request into `dev` closes the issue when it merges (the shared workflow in cesiumlang/.github, called from each repository's `close-issues.yml`); inside code spans and code blocks it is ignored. Use `Part of #N` for partial work.
-- A mention or assignment from the app reaches Randy: mention and assign him where his input is needed.
+- **Assignees say whose action is next** (Randy, 2026-11-20). Randy is assigned only where he must answer something or do something Claude cannot (a decision, a web-only step); everything whose next step is Claude's is assigned to `cesium-bot` (GitHub Apps cannot be assignees). When the next step changes hands, change the assignee. A mention or assignment from the app reaches Randy.
 
 ## Merging
 
