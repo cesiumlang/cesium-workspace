@@ -167,9 +167,6 @@
       "streetsidesoftware.code-spell-checker-scientific-terms",
       "streetsidesoftware.code-spell-checker-win32",
       "ltex-plus.vscode-ltex-plus",
-      // the environment of the .envrc files for the editor, its terminals
-      // and extensions (cesium-src/buildtools/readme.md says what it needs)
-      "mkhl.direnv",
 
       // cesiumlang.org
       "foam.foam-vscode",
