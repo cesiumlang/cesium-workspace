@@ -2,6 +2,9 @@
   "folders": [
     {
       "path": "."
+    },
+    {
+      "path": "../../scratch/git/skein"
     }
   ],
   // This repository is the parent of the Cesium repositories, which are its
