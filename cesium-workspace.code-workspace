@@ -136,7 +136,7 @@
     "svg.preview.background": "dark-transparent",
 
     // cesium-src: the Zig of the Cesium devkit
-    // (cd cesium-src && python tools/fetch-devkit.py)
+    // (cd cesium-src && bash tools/fetch-devkit.sh)
     "zig.path": "${workspaceFolder}/cesium-src/.devkit/zig/zig",
     "zig.zls.enabled": "on",
     "zig.zls.inlayHintsShowParameterName": false,
