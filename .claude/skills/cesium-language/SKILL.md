@@ -26,7 +26,7 @@ What stage 0 rejects because the design is open (literals with no typed context,
 
 ## Checking code
 
-- Build the compilers in `cesium-src`: `.devkit/zig/zig build` (`cesium0` in `zig-out/bin`; `cesium1` is built by the tests until cesiumlang/cesium#81).
+- Build the compilers in `cesium-src`: `.devkit/zig/zig build` installs `cesium0` and `cesium1` to `zig-out/bin` (on the workspace `PATH` through `.envrc`).
 - `cesium0 --emit-mir -o out.mir a.csm b.csm` checks S0 and reports every error as `file:line:col: error: message` (see the bootstrap README for the exact form).
 - `cat a.csm b.csm | cesium1` checks the same unit and stops at the first error; its line numbers count from the start of the joined input.
 - In VS Code, `zcsls` (vscode-cesium) shows the same diagnostics in the Problems panel.

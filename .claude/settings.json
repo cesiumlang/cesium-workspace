@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "cesiumlang": {
+      "source": {
+        "source": "directory",
+        "path": "./vscode-cesium"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "cesium@cesiumlang": true
+  }
+}
