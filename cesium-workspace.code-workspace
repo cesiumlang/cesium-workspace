@@ -30,6 +30,9 @@
       // devkits
       "no-ci.txt": "gitignore",
       "*.ssa": "plaintext",
+      // skein: Jekyll templates are Liquid, which HTML checkers cannot parse
+      "**/site/_layouts/*.html": "liquid",
+      "**/site/_includes/*.html": "liquid",
     },
     "files.exclude": {
       "**/node_modules/**": true,
@@ -182,6 +185,9 @@
 
       // devkits
       "timonwong.shellcheck",
+
+      // skein
+      "sissel.shopify-liquid",
     ]
   },
   "tasks": {
