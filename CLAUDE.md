@@ -3,14 +3,13 @@
 This repository is the parent of the Cesium repositories. It has no code of its own; its `.claude/` holds the agent setup (skills, rules, subagents). Its submodules, side by side:
 
 - `cesium-src/` is cesiumlang/cesium, the compiler. Its submodules: `buildtools/` (cesium-buildtools), `.cspell/cesium/` (cspell-cesium).
-- `cesiumlang.org/` is the website. Its submodules: `quartz_repo/` (Quartz, locked), `grammar/`, `.cspell/cesium/`.
+- `cesiumlang.org/` is the website, built with Zine from Markdown (`zig build`). Its submodules: `grammar/`, `.cspell/cesium/`.
 - `devkits/` builds the devkit. Its submodules: `qbe/`, `llvm-project/`.
 - `vscode-cesium/` is the VS Code extension and the temporary language server `zcsls` (Zig). Its submodule: `grammar/`.
 - `dot-github/` is cesiumlang/.github, the organization profile and the shared workflows.
 
 ## Rules
 
-- `cesiumlang.org/quartz_repo/` and `cesiumlang.org/src/quartz/` are locked: never modify them or move the `quartz_repo` commit; tell emanspeaks if something there must change.
 - Do not redirect output to NUL (`2>nul`, `> NUL`); it does not work as expected on Windows. Let commands print.
 - Indentation is two spaces (Zig: four, as `zig fmt` writes). Language-specific rules are in `.claude/rules/` and load with the files they cover.
 - Builds use the Zig of the Cesium devkit (`cesium-src/.devkit`, `bash tools/fetch-devkit.sh`), not the VS Code extension's Zig.
@@ -32,4 +31,4 @@ This repository is the parent of the Cesium repositories. It has no code of its 
 - Each submodule here records the `dev` head of its repository: after a merge to a submodule's `dev`, move the pointer here in the same piece of work.
 - emanspeaks's uncommitted edits to `CLAUDE.md`, the LTeX dictionary and false-positive files, and readmes, in any repository here, go into the next commit there. He says when he is writing something larger to leave alone.
 - A setting or tool requirement added to a submodule's `*.code-workspace` or `.envrc` is repeated in `cesium-workspace.code-workspace` and `.envrc` here. LTeX reads only this root's dictionary, so words added to a submodule's `.vscode/ltex.dictionary.en-US.txt` go into the one here too.
-- The website's `build.js` finds the compiler in `../cesium-src`; the website does not have it as a submodule.
+- The website builds with the devkit Zig of a clone of the compiler, `../cesium-src` here and `cesium-src/` in CI; the website does not have the compiler as a submodule.
