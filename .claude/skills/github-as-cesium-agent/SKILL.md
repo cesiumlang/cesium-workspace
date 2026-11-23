@@ -21,7 +21,7 @@ The app can write contents, issues, pull requests, workflows, actions, administr
 
 ## Messages
 
-- **Commits:** one short line (about 50 characters), a blank line, then `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`. No other body.
+- **Commits:** one short line (about 50 characters), a blank line, then `Co-Authored-By: Claude MODEL <noreply@anthropic.com>`, with the model this session runs on (`Claude Opus 5.5`, say; emanspeaks switches models, so it is never assumed). No other body.
 - **Pull request bodies:** what and why, how it was checked, a "Choices made without guidance" section, ending with `🤖 Generated with [Claude Code](https://claude.com/claude-code)`. Write the body to a file and pass `--body-file`: heredocs in the Bash tool mangle backslashes and apostrophes.
 - **Issues and comments** end with `_Filed by Claude at the request of emanspeaks._` or `_Posted by Claude at the request of emanspeaks._`.
 - **Every issue has a type** (organization issue types, 2026-11-21): Task (work, including docs trackers), Bug, Feature, Design (an open language or toolchain design question), Question (an answer needed from emanspeaks), Decision (a decision record, until rewritten as a proposal). Set it when filing: `gh api -X PATCH repos/cesiumlang/<repo>/issues/<n> -f type=Task` (the app may set types, not create them).
