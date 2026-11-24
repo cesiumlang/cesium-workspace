@@ -29,6 +29,8 @@ bash $P status "In Progress" vscode-cesium#7
 bash $P block cesiumlang.org#30 cesium#90  # cesiumlang.org#30 is blocked by cesium#90
 ```
 
+An issue or pull request of another organization that Cesium work waits on (a Skein release or feature) goes on the board too, written `owner/repo#N`: `bash $P add chasingdaylight/skein#72 "Editor infrastructure" --after cesium#98` (emanspeaks, 2026-11-24). It gets the Track and the Next action here; its labels are its own project's.
+
 `list` without a Track prints every row with its position. Decide the place by reading the neighbors in that Track: an item goes after what it depends on and before what depends on it.
 
 ## Next action
