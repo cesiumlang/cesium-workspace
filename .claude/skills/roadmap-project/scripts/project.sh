@@ -70,13 +70,34 @@ issue_node () {
   local out
   split_ref "$1"
   out=$(gql 'query($o:String!,$r:String!,$n:Int!){repository(owner:$o,name:$r){
-      issueOrPullRequest(number:$n){... on Issue{id projectItems(first:10){nodes{id project{number}}}}
-                                    ... on PullRequest{id projectItems(first:10){nodes{id project{number}}}}}}}' \
+      issueOrPullRequest(number:$n){... on Issue{id projectItems(first:20){nodes{id project{number owner{... on Organization{login}}}}}}
+                                    ... on PullRequest{id projectItems(first:20){nodes{id project{number owner{... on Organization{login}}}}}}}}}' \
     ".data.repository.issueOrPullRequest | if . == null then \"null\"
-      else \"\(.id) \([.projectItems.nodes[] | select(.project.number == $NUMBER) | .id][0] // \"\")\" end" \
+      else \"\(.id) \([.projectItems.nodes[] | select(.project.number == $NUMBER and .project.owner.login == \"$ORG\") | .id][0] // \"\")\" end" \
     -f "o=$OWNER" -f "r=$REPO" -F "n=$NUM") || exit 1
   [ "$out" != null ] || die "$1 does not exist"
+  # an issue of another organization does not show this app its project items: look on the board
+  if [ "$OWNER" != "$ORG" ] && [ -z "${out#* }" ]; then
+    out="${out%% *} $(board_item "${out%% *}")" || exit 1
+  fi
   printf '%s\n' "$out"
+}
+
+# board_item CONTENT_ID: the Project's item of that issue or pull request, or nothing
+board_item () {
+  local cursor= page
+  local query='query($o:String!,$n:Int!,$c:String){organization(login:$o){projectV2(number:$n){
+      items(first:100,after:$c){pageInfo{hasNextPage endCursor} nodes{id content{... on Issue{id} ... on PullRequest{id}}}}}}}'
+  local jq=".data.organization.projectV2.items | \"\(.pageInfo.hasNextPage) \(.pageInfo.endCursor)\",
+    ([.nodes[] | select(.content.id == $(jstr "$1")) | .id][0] // \"\")"
+  while :; do
+    if [ -n "$cursor" ]; then page=$(gql "$query" "$jq" -f o=$ORG -F n=$NUMBER -f "c=$cursor") || exit 1
+    else page=$(gql "$query" "$jq" -f o=$ORG -F n=$NUMBER) || exit 1; fi
+    local found=${page#*$'\n'}
+    [ -n "$found" ] && { printf '%s\n' "$found"; return 0; }
+    [ "${page%% *}" = true ] || return 0
+    cursor=${page%%$'\n'*}; cursor=${cursor#* }
+  done
 }
 
 # item_of REF: print the Project item of REF
