@@ -12,8 +12,8 @@ No model was trained on Cesium. Do not guess its syntax from C, Zig or C++: chec
 
 ## Where the truth is, in this order
 
-1. **The S0 grammar,** for anything `cesium0` and `cesium1` compile: `cesiumlang.org/content/spec/s0-grammar.md` (EBNF; every production cites its decision). Section 3.10 lists where stage 0 as implemented differs.
-2. **The specification draft:** `cesiumlang.org/content/spec/` (`index.md` explains the Decided / Provisional / Open markers; `lexical.md`). Only rules marked Decided are settled.
+1. **The S0 chapter,** for anything `cesium0` and `cesium1` compile: `cesium-src/spec/s0.md` (the grammar as `syntax` rules, with the rules around it). Its last section, "Stage 0 as implemented", lists where `cesium0` differs.
+2. **The specification:** `cesium-src/spec/` (`index.md` explains the rules, their statuses and the source each gives: decided, a direction of emanspeaks, by use, provisional; `lexical.md`). Every rule is `draft` until a proposal accepts it (`cesium-src/proposals/`): a decided or direction rule is guidance, a provisional one is a recommendation. `skein trace ID` shows a rule with what refers to it.
 3. **Decision records** in cesiumlang/cesium (label `decision`): the ownership design (#11), stage 0 and S0 (#9), core MIR (#8). Open questions have the label `design` or `audit`: never treat their suggestions as decided.
 4. **The reference pages:** `cesiumlang.org/content/reference/`. They teach by example; their "Open" callouts mark what is undecided.
 
