@@ -13,7 +13,8 @@
 #   block BLOCKED BLOCKER...           link "BLOCKED is blocked by BLOCKER" between issues
 #   draft TITLE BODY TRACK (--after REF | --top)   add a draft item for a plan without an issue
 #
-# REF is repo#number in cesiumlang, e.g. cesium#57 or vscode-cesium#7 (".github" for the org repo).
+# REF is repo#number in cesiumlang, e.g. cesium#57 or vscode-cesium#7 (".github" for the org repo),
+# or owner/repo#number for an issue of another organization, e.g. chasingdaylight/skein#212.
 # Needs only bash and gh (its --jq; no jq binary).
 set -uo pipefail
 
@@ -56,9 +57,10 @@ option () {
   esac
 }
 
-# split_ref REF: set REPO and NUM
+# split_ref REF: set OWNER, REPO and NUM
 split_ref () {
-  REPO=${1%%#*} NUM=${1#*#}
+  REPO=${1%%#*} NUM=${1#*#} OWNER=$ORG
+  case $REPO in */*) OWNER=${REPO%%/*} REPO=${REPO#*/} ;; esac
   case $1 in *#*) ;; *) NUM= ;; esac
   [[ -n $REPO && $NUM =~ ^[0-9]+$ ]] || die "not a reference: '$1' (expected repo#number)"
 }
@@ -72,7 +74,7 @@ issue_node () {
                                     ... on PullRequest{id projectItems(first:10){nodes{id project{number}}}}}}}' \
     ".data.repository.issueOrPullRequest | if . == null then \"null\"
       else \"\(.id) \([.projectItems.nodes[] | select(.project.number == $NUMBER) | .id][0] // \"\")\" end" \
-    -f o=$ORG -f "r=$REPO" -F "n=$NUM") || exit 1
+    -f "o=$OWNER" -f "r=$REPO" -F "n=$NUM") || exit 1
   [ "$out" != null ] || die "$1 does not exist"
   printf '%s\n' "$out"
 }
@@ -124,7 +126,7 @@ cmd_list () {
   local query='query($o:String!,$n:Int!,$c:String){organization(login:$o){projectV2(number:$n){
       items(first:100,after:$c){pageInfo{hasNextPage endCursor} nodes{
         fieldValues(first:10){nodes{... on ProjectV2ItemFieldSingleSelectValue{name field{... on ProjectV2SingleSelectField{name}}}}}
-        content{... on Issue{number title repository{name}} ... on PullRequest{number title repository{name}}
+        content{... on Issue{number title repository{name owner{login}}} ... on PullRequest{number title repository{name owner{login}}}
                 ... on DraftIssue{title}}}}}}}'
   # the page line, then one line per row: status, track, item, title
   local jq='.data.organization.projectV2.items
@@ -132,7 +134,7 @@ cmd_list () {
       (.nodes[] | ([.fieldValues.nodes[] | select(.field) | {(.field.name): .name}] | add // {}) as $v
         | (.content // {}) as $c
         | [$v.Status // "", $v.Track // "",
-           (if $c.number then "\($c.repository.name)#\($c.number)" else "draft" end), $c.title // ""]
+           (if $c.number then "\(if $c.repository.owner.login == "cesiumlang" then "" else "\($c.repository.owner.login)/" end)\($c.repository.name)#\($c.number)" else "draft" end), $c.title // ""]
         | join("\u001f"))'
   while :; do
     if [ -n "$cursor" ]; then
@@ -200,9 +202,9 @@ cmd_block () {
   shift
   for blocker in "$@"; do
     split_ref "$blocker"
-    id=$(gh api "repos/$ORG/$REPO/issues/$NUM" -q .id) || exit 1
+    id=$(gh api "repos/$OWNER/$REPO/issues/$NUM" -q .id) || exit 1
     split_ref "$blocked"
-    if out=$(gh api -X POST "repos/$ORG/$REPO/issues/$NUM/dependencies/blocked_by" -F "issue_id=$id" 2>&1 > /dev/null); then
+    if out=$(gh api -X POST "repos/$OWNER/$REPO/issues/$NUM/dependencies/blocked_by" -F "issue_id=$id" 2>&1 > /dev/null); then
       printf '%s blocked by %s: ok\n' "$blocked" "$blocker"
     else
       printf '%s blocked by %s: %s\n' "$blocked" "$blocker" "$out"

@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # next-action.sh ORG APP_FOLDER
 # Gives the organization's project 1 the field "Next action" (emanspeaks or
-# agent or web-agent), sets it on every item that is not done, and puts the
-# label `agent` on the open issues whose next step is an agent's. An item is
-# the owner's when it is assigned to emanspeaks, the web agent's when its issue
-# has the label `web-agent`, and the agent's otherwise.
+# agent), sets it on every item that is not done, and puts the label `agent` on
+# the open issues of the organization whose next step is the agent's. An item
+# is the owner's when it is assigned to emanspeaks, and the agent's otherwise
+# (`web-agent` issues included: there is no separate web agent since
+# 2026-11-24). Items from other organizations get the field only; their labels
+# are their own project's.
 set -euo pipefail
 org=$1
 export GH_TOKEN="$(bash /c/scratch/github-apps/app-token.sh "$2")"
@@ -40,11 +42,12 @@ while IFS=$'\t' read -r item type repo number status who; do
   gh project item-edit --id "$item" --project-id "$project" --field-id "$fid" --single-select-option-id "$opt" < /dev/null > /dev/null
   [ "$type" = Issue ] || continue
   repo=${repo#https://github.com/}
+  case $repo in "$org"/*) ;; *) continue ;; esac
   ensure_label "$repo"
   if [ "$who" = emanspeaks ]; then
     gh issue edit "$number" --repo "$repo" --remove-label agent < /dev/null > /dev/null 2>&1 || true
   else
     gh issue edit "$number" --repo "$repo" --add-label agent < /dev/null > /dev/null
   fi
-done <<< "$(gh project item-list 1 --owner "$org" --limit 500 --format json --jq '.items[] | [.id, .content.type, .content.repository, (.content.number | tostring), (.status // ""), (if (.assignees // []) | index("emanspeaks") then "emanspeaks" elif (.labels // []) | index("web-agent") then "web-agent" else "agent" end)] | @tsv' < /dev/null)"
+done <<< "$(gh project item-list 1 --owner "$org" --limit 500 --format json --jq '.items[] | [.id, .content.type, .content.repository, (.content.number | tostring), (.status // ""), (if (.assignees // []) | index("emanspeaks") then "emanspeaks" else "agent" end)] | @tsv' < /dev/null)"
 echo "$org: next action emanspeaks on $owners, agent on $agents, web-agent on $webs; $skipped done items left alone"
