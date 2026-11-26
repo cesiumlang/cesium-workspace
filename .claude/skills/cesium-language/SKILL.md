@@ -28,6 +28,6 @@ What stage 0 rejects because the design is open (literals with no typed context,
 
 - Build the compilers in `cesium-src`: `.devkit/zig/zig build` installs `cesium0` and `cesium1` to `zig-out/bin` (on the workspace `PATH` through `.envrc`).
 - `cesium0 --emit-mir -o out.mir a.csm b.csm` checks S0 and reports every error as `file:line:col: error[E0304]: message` (see the bootstrap README for the exact form); `bootstrap/diagnostics.md` explains each code.
-- `cat a.csm b.csm | cesium1` checks the same unit and stops at the first error; its line numbers count from the start of the joined input.
+- `cesium1 a.csm b.csm` checks the same unit and stops at the first error, naming its file; given the files joined on standard input instead (`cat a.csm b.csm | cesium1`, as editors do), its line numbers count from the start of the input.
 - In VS Code, `zcsls` (vscode-cesium) shows the same diagnostics in the Problems panel.
 - A Cesium change is not done until a compiler accepts it, or rejects it with the expected message for an error test.
