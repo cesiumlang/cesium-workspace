@@ -2,6 +2,9 @@
   "folders": [
     {
       "path": "."
+    },
+    {
+      "path": "../../scratch/git/skein"
     }
   ],
   // This repository is the parent of the Cesium repositories, which are its
@@ -27,6 +30,9 @@
       // devkits
       "no-ci.txt": "gitignore",
       "*.ssa": "plaintext",
+      // skein: Jekyll templates are Liquid, which HTML checkers cannot parse
+      "**/site/_layouts/*.html": "liquid",
+      "**/site/_includes/*.html": "liquid",
     },
     "files.exclude": {
       "**/node_modules/**": true,
@@ -35,9 +41,7 @@
       "**/zig-cache*/**": true,
       "**/.cache/**": true,
       "cesium-src/.devkit-downloads/**": true,
-      "cesiumlang.org/quartz_repo/.github/workflows/**": true,
-      "cesiumlang.org/src/quartz/**": true,
-      "cesiumlang.org/build/**": true,
+      "cesiumlang.org/zig-out/**": true,
       // LLVM is built from, never edited: keep it out of the explorer
       "devkits/llvm-project": true,
       "devkits/work/**": true,
@@ -57,8 +61,7 @@
       "cesium-src/buildtools/bin/**": true,
       "cesium-src/buildtools/downloads/**": true,
       "cesium-src/buildtools/opt/**": true,
-      "cesiumlang.org/build/**": true,
-      "cesiumlang.org/src/quartz/**": true,
+      "cesiumlang.org/zig-out/**": true,
       "cesiumlang.org/cesium-src/**": true,
       "devkits/llvm-project/**": true,
       "devkits/work/**": true,
@@ -70,7 +73,7 @@
     "search.exclude": {
       "cesium-src/.devkit/**": true,
       "cesium-src/buildtools/opt/**": true,
-      "cesiumlang.org/build/**": true,
+      "cesiumlang.org/zig-out/**": true,
       "cesiumlang.org/cesium-src/**": true,
       "devkits/llvm-project/**": true,
       "devkits/qbe/**": true,
@@ -113,7 +116,7 @@
       "devkits/llvm-project",
       "devkits/work",
       "devkits/dist",
-      "cesiumlang.org/build",
+      "cesiumlang.org/zig-out",
     ],
 
     // cesiumlang.org
@@ -125,9 +128,8 @@
       "devkits/**/*",
       "dot-github/**/*",
       "vscode-cesium/**/*",
-      "cesiumlang.org/build/**/*",
-      "cesiumlang.org/src/quartz/**/*",
-      "cesiumlang.org/quartz_repo/**/*",
+      "cesiumlang.org/zig-out/**/*",
+      "cesiumlang.org/site/content/**/*",
       "cesiumlang.org/grammar/**/*",
     ],
     "foam.files.newNotePath": "currentDir",
@@ -136,7 +138,7 @@
     "svg.preview.background": "dark-transparent",
 
     // cesium-src: the Zig of the Cesium devkit
-    // (cd cesium-src && python tools/fetch-devkit.py)
+    // (cd cesium-src && bash tools/fetch-devkit.sh)
     "zig.path": "${workspaceFolder}/cesium-src/.devkit/zig/zig",
     "zig.zls.enabled": "on",
     "zig.zls.inlayHintsShowParameterName": false,
@@ -179,6 +181,9 @@
 
       // devkits
       "timonwong.shellcheck",
+
+      // skein
+      "sissel.shopify-liquid",
     ]
   },
   "tasks": {
