@@ -229,3 +229,8 @@ WinDbg
 cppvsdbg
 GPROC
 cdb
+endbr
+movq
+cstdio
+infile
+nfiles
