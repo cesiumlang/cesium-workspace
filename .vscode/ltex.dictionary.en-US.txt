@@ -224,3 +224,8 @@ readme
 cppdbg
 cpptools
 xcrun
+CodeView
+WinDbg
+cppvsdbg
+GPROC
+cdb

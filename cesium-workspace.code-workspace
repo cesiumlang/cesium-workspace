@@ -236,6 +236,25 @@
         },
       },
       {
+        "label": "cesium-src: zig build lines",
+        "type": "shell",
+        "command": "${config:zig.path}",
+        "args": [
+          "build",
+          "lines",
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}/cesium-src"
+        },
+        "problemMatcher": [],
+        "presentation": {
+          "clear": true,
+          "reveal": "always",
+          "panel": "shared",
+          "revealProblems": "never",
+        },
+      },
+      {
         "label": "site: build and serve",
         "type": "shell",
         "command": "npm",
@@ -271,6 +290,32 @@
         ],
         "cwd": "${workspaceFolder}/cesium-src",
         "preLaunchTask": "cesium-src: zig build",
+        "console": "integratedTerminal",
+      },
+      // Cesium code by .csm line: breakpoints in bootstrap/stage1/*.csm
+      // (CodeView, cesiumlang/vscode-cesium#47)
+      {
+        "name": "cesium-src: cesium1 (cppvsdbg)",
+        "type": "cppvsdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/cesium-src/zig-out/bin/cesium1.exe",
+        "args": [
+          "-o",
+          "${workspaceFolder}/cesium-src/tmp/out1.s",
+          "${workspaceFolder}/cesium-src/bootstrap/tests/s0/tokens.csm",
+        ],
+        "cwd": "${workspaceFolder}/cesium-src",
+        "preLaunchTask": "cesium-src: zig build",
+        "console": "integratedTerminal",
+      },
+      // bootstrap/tests/s0/lines.csm, which traps at line 12
+      {
+        "name": "cesium-src: lines (cppvsdbg)",
+        "type": "cppvsdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/cesium-src/zig-out/bin/lines.exe",
+        "cwd": "${workspaceFolder}/cesium-src",
+        "preLaunchTask": "cesium-src: zig build lines",
         "console": "integratedTerminal",
       },
     ],
