@@ -234,3 +234,9 @@ movq
 cstdio
 infile
 nfiles
+adrp
+leaq
+UQUADWORD
+breg
+ndiff
+vsrc
