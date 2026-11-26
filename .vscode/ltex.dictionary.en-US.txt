@@ -217,3 +217,10 @@ mkhl
 certutil
 MSYS
 Authenticode
+gdb
+lldb
+lldb-dap
+readme
+cppdbg
+cpptools
+xcrun
