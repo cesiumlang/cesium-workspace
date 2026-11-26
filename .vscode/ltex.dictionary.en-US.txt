@@ -216,3 +216,4 @@ ovsx
 mkhl
 certutil
 MSYS
+Authenticode
