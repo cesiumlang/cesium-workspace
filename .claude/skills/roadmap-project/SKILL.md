@@ -8,7 +8,7 @@ description: Keep the Cesium Roadmap GitHub Project in order - add a newly filed
 [Cesium Roadmap](https://github.com/orgs/cesiumlang/projects/1) (cesiumlang, project 1) is the source of truth for the order of all work across the Cesium repositories. Its README says how it is kept; in short:
 
 - **Rows are in priority order.** The next item of a Track is its first row that is not Done.
-- **Every new issue goes in when it is filed,** with its Track, at its place in that order, never at the end.
+- **Every new issue goes in when it is filed,** with its Track, at its place in that order, never at the end. So does **every pull request that stays open** (emanspeaks, 2026-11-27): a proposal waiting for his decision, a standing `dev` to `main` pull request (placed after the work of the release it makes), a release for him to merge. A pull request merged at once needs no row.
 - **Status:** the issue's own status (GitHub's issue status): Backlog, Todo, In progress, In review, Done, Not planned, Duplicate. Set In progress when work starts; In review while a pull request waits for emanspeaks's decision (a proposal's design issue); Backlog for the `backlog` milestone; closing the issue sets Done. The Roadmap's Status field and the issue's status are kept the same both ways (see "Status, both ways").
 - **Real dependencies** are GitHub "blocked by" links between issues.
 - **Every plan is an issue,** even one far off or not yet scoped; the issue says what it waits on. No draft items (emanspeaks, 2026-11-20): they are invisible in the repositories and cannot be referenced or linked.
@@ -26,6 +26,8 @@ description: Keep the Cesium Roadmap GitHub Project in order - add a newly filed
 ## Status, both ways (emanspeaks, 2026-11-27)
 
 A change of the status on an issue shows in the Roadmap's Status column, and a change on the Roadmap changes the issue. `scripts/status-sync.sh cesiumlang cesiumlang` does it: the hidden text field "Synced status" holds the value last synced, so the side that differs from it is the side that changed (the Roadmap wins when both did). The workflow `roadmap-sync.yml` of cesium-workspace runs it, and `next-action.sh`, every 10 minutes; run it by hand after changing statuses in bulk. Pull requests on the Roadmap have only the Roadmap's Status.
+
+**The CI column** (emanspeaks, 2026-11-27): `scripts/ci-sync.sh cesiumlang cesiumlang` sets it to ✅ Passing, ❌ Failing or 🟡 Running from the checks of each open pull request's latest commit, and of an open pull request that closes an issue for that issue's row; empty where there are no checks. The same workflow runs it, so it may lag by up to 10 minutes.
 
 ## Script
 
