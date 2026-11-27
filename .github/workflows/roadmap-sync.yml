@@ -4,7 +4,8 @@ name: Roadmap sync
 # every 10 minutes and by hand, with the scripts of the roadmap-project skill:
 # - status-sync.sh: the Roadmap's Status and each issue's own status, both
 #   ways (emanspeaks, 2026-11-27);
-# - next-action.sh: Next action and the `agent` label, from the assignees.
+# - next-action.sh: Next action and the `agent` label, from the assignees;
+# - ci-sync.sh: the CI column, from the checks of each open pull request.
 #
 # It runs as the Cesium Agent app, with the secret CESIUM_AGENT_PRIVATE_KEY, a
 # private key of the app (as cesium's site.yml); without it, it says so and
@@ -59,3 +60,9 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.token.outputs.token }}
         run: bash .claude/skills/roadmap-project/scripts/next-action.sh cesiumlang cesiumlang
+
+      - name: The CI column
+        if: steps.key.outputs.set == 'true'
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+        run: bash .claude/skills/roadmap-project/scripts/ci-sync.sh cesiumlang cesiumlang
