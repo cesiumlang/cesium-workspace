@@ -9,7 +9,9 @@
 # are their own project's.
 set -euo pipefail
 org=$1
-export GH_TOKEN="$(bash /c/scratch/github-apps/app-token.sh "$2")"
+# a token given in the environment (as the scheduled workflow gives it) is used as it is
+[ -n "${GH_TOKEN:-}" ] || GH_TOKEN="$(bash /c/scratch/github-apps/app-token.sh "$2")"
+export GH_TOKEN
 
 project=$(gh project view 1 --owner "$org" --format json --jq .id < /dev/null)
 field() { gh project field-list 1 --owner "$org" --format json --jq "$1" < /dev/null; }

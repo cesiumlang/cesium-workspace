@@ -1,6 +1,9 @@
 {
   "folders": [
     {
+      // named, so tasks and launch configurations can say
+      // ${workspaceFolder:workspace} in this multi-root workspace
+      "name": "workspace",
       "path": "."
     },
     {
@@ -18,6 +21,9 @@
   //   vscode-cesium/vscode-cesium.code-workspace
   // A setting added to one of those belongs here too.
   "settings": {
+    // breakpoints in .csm files without vscode-cesium 0.1.3 installed, which
+    // allows them (cesiumlang/vscode-cesium#48); remove once it is
+    "debug.allowBreakpointsEverywhere": true,
     "files.associations": {
       // Cesium source and module interface files (cesiumlang/cesium#14)
       "*.csm": "cesium",
@@ -157,6 +163,7 @@
     // no CMake project here; C dependencies may carry a CMakeLists.txt
     "cmake.ignoreCMakeListsMissing": true,
     "cmake.configureOnOpen": false,
+    "powershell.cwd": "workspace",
   },
   "extensions": {
     // See http://go.microsoft.com/fwlink/?LinkId=827846
@@ -192,12 +199,12 @@
       {
         "label": "cesium-src: zig build",
         "type": "shell",
-        "command": "${config:zig.path}",
+        "command": "${workspaceFolder:workspace}/cesium-src/.devkit/zig/zig",
         "args": [
           "build",
         ],
         "options": {
-          "cwd": "${workspaceFolder}/cesium-src"
+          "cwd": "${workspaceFolder:workspace}/cesium-src"
         },
         "group": {
           "kind": "build",
@@ -215,7 +222,7 @@
       {
         "label": "cesium-src: zig build test",
         "type": "shell",
-        "command": "${config:zig.path}",
+        "command": "${workspaceFolder:workspace}/cesium-src/.devkit/zig/zig",
         "args": [
           "build",
           "test",
@@ -223,7 +230,7 @@
           "all",
         ],
         "options": {
-          "cwd": "${workspaceFolder}/cesium-src"
+          "cwd": "${workspaceFolder:workspace}/cesium-src"
         },
         "group": "test",
         "problemMatcher": [],
@@ -236,6 +243,25 @@
         },
       },
       {
+        "label": "cesium-src: zig build lines",
+        "type": "shell",
+        "command": "${workspaceFolder:workspace}/cesium-src/.devkit/zig/zig",
+        "args": [
+          "build",
+          "lines",
+        ],
+        "options": {
+          "cwd": "${workspaceFolder:workspace}/cesium-src"
+        },
+        "problemMatcher": [],
+        "presentation": {
+          "clear": true,
+          "reveal": "always",
+          "panel": "shared",
+          "revealProblems": "never",
+        },
+      },
+      {
         "label": "site: build and serve",
         "type": "shell",
         "command": "npm",
@@ -244,7 +270,7 @@
           "dev",
         ],
         "options": {
-          "cwd": "${workspaceFolder}/cesiumlang.org"
+          "cwd": "${workspaceFolder:workspace}/cesiumlang.org"
         },
         "problemMatcher": [],
         "presentation": {
@@ -262,15 +288,41 @@
         "name": "cesium-src: cesium0 (cppvsdbg)",
         "type": "cppvsdbg",
         "request": "launch",
-        "program": "${workspaceFolder}/cesium-src/zig-out/bin/cesium0.exe",
+        "program": "${workspaceFolder:workspace}/cesium-src/zig-out/bin/cesium0.exe",
         "args": [
-          "--emit-mir",
+          "--emit-sir",
           "-o",
-          "${workspaceFolder}/cesium-src/tmp/out.mir",
-          "${workspaceFolder}/cesium-src/bootstrap/tests/s0/tokens.csm",
+          "${workspaceFolder:workspace}/cesium-src/tmp/out.sir",
+          "${workspaceFolder:workspace}/cesium-src/bootstrap/tests/s0/tokens.csm",
         ],
-        "cwd": "${workspaceFolder}/cesium-src",
+        "cwd": "${workspaceFolder:workspace}/cesium-src",
         "preLaunchTask": "cesium-src: zig build",
+        "console": "integratedTerminal",
+      },
+      // Cesium code by .csm line: breakpoints in bootstrap/stage1/*.csm
+      // (CodeView, cesiumlang/vscode-cesium#47)
+      {
+        "name": "cesium-src: cesium1 (cppvsdbg)",
+        "type": "cppvsdbg",
+        "request": "launch",
+        "program": "${workspaceFolder:workspace}/cesium-src/zig-out/bin/cesium1.exe",
+        "args": [
+          "-o",
+          "${workspaceFolder:workspace}/cesium-src/tmp/out1.s",
+          "${workspaceFolder:workspace}/cesium-src/bootstrap/tests/s0/tokens.csm",
+        ],
+        "cwd": "${workspaceFolder:workspace}/cesium-src",
+        "preLaunchTask": "cesium-src: zig build",
+        "console": "integratedTerminal",
+      },
+      // bootstrap/tests/s0/lines.csm, which traps at line 12
+      {
+        "name": "cesium-src: lines (cppvsdbg)",
+        "type": "cppvsdbg",
+        "request": "launch",
+        "program": "${workspaceFolder:workspace}/cesium-src/zig-out/bin/lines.exe",
+        "cwd": "${workspaceFolder:workspace}/cesium-src",
+        "preLaunchTask": "cesium-src: zig build lines",
         "console": "integratedTerminal",
       },
     ],

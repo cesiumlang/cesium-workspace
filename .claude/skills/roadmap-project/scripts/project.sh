@@ -8,7 +8,7 @@
 #   list [TRACK]                       rows in priority order: position, status, track, item, title
 #   add REF TRACK (--after REF | --top) add an issue (or move it) with that Track, placed after REF
 #   move REF (--after REF | --top)     place an existing row
-#   status STATUS REF...               set Status (Todo, In Progress, Done)
+#   status STATUS REF...               set Status (Backlog, Todo, In progress, In review, Done, ...; status-sync.sh carries it to the issue)
 #   track TRACK REF...                 set Track
 #   block BLOCKED BLOCKER...           link "BLOCKED is blocked by BLOCKER" between issues
 #   draft TITLE BODY TRACK (--after REF | --top)   add a draft item for a plan without an issue
@@ -93,7 +93,9 @@ board_item () {
   while :; do
     if [ -n "$cursor" ]; then page=$(gql "$query" "$jq" -f o=$ORG -F n=$NUMBER -f "c=$cursor") || exit 1
     else page=$(gql "$query" "$jq" -f o=$ORG -F n=$NUMBER) || exit 1; fi
-    local found=${page#*$'\n'}
+    # $(...) drops the empty second line when the page does not have it
+    local found=
+    case "$page" in *$'\n'*) found=${page#*$'\n'} ;; esac
     [ -n "$found" ] && { printf '%s\n' "$found"; return 0; }
     [ "${page%% *}" = true ] || return 0
     cursor=${page%%$'\n'*}; cursor=${cursor#* }
