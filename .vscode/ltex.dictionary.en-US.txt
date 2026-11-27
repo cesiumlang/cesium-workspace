@@ -253,3 +253,8 @@ cesiumlang
 ABIs
 signedness
 cesiumlang
+rstd
+spctl
+uuidgen
+vcvars
+vswhere
