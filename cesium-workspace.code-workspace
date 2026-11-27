@@ -289,9 +289,9 @@
         "request": "launch",
         "program": "${workspaceFolder:workspace}/cesium-src/zig-out/bin/cesium0.exe",
         "args": [
-          "--emit-mir",
+          "--emit-sir",
           "-o",
-          "${workspaceFolder:workspace}/cesium-src/tmp/out.mir",
+          "${workspaceFolder:workspace}/cesium-src/tmp/out.sir",
           "${workspaceFolder:workspace}/cesium-src/bootstrap/tests/s0/tokens.csm",
         ],
         "cwd": "${workspaceFolder:workspace}/cesium-src",
