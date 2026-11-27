@@ -163,6 +163,7 @@
     // no CMake project here; C dependencies may carry a CMakeLists.txt
     "cmake.ignoreCMakeListsMissing": true,
     "cmake.configureOnOpen": false,
+    "powershell.cwd": "workspace",
   },
   "extensions": {
     // See http://go.microsoft.com/fwlink/?LinkId=827846

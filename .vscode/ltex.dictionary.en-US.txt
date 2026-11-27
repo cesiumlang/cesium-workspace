@@ -241,3 +241,8 @@ breg
 ndiff
 vsrc
 fdebug
+getpid
+
+JSONC
+zls
+vscode-cesium
