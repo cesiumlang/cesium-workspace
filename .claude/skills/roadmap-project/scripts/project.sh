@@ -8,7 +8,7 @@
 #   list [TRACK]                       rows in priority order: position, status, track, item, title
 #   add REF TRACK (--after REF | --top) add an issue (or move it) with that Track, placed after REF
 #   move REF (--after REF | --top)     place an existing row
-#   status STATUS REF...               set Status (Todo, In Progress, Done)
+#   status STATUS REF...               set Status (Backlog, Todo, In progress, In review, Done, ...; status-sync.sh carries it to the issue)
 #   track TRACK REF...                 set Track
 #   block BLOCKED BLOCKER...           link "BLOCKED is blocked by BLOCKER" between issues
 #   draft TITLE BODY TRACK (--after REF | --top)   add a draft item for a plan without an issue

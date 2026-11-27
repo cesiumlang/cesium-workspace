@@ -1,0 +1,61 @@
+name: Roadmap sync
+
+# Keeps the Cesium Roadmap (cesiumlang project 1) in step with its issues,
+# every 10 minutes and by hand, with the scripts of the roadmap-project skill:
+# - status-sync.sh: the Roadmap's Status and each issue's own status, both
+#   ways (emanspeaks, 2026-11-27);
+# - next-action.sh: Next action and the `agent` label, from the assignees.
+#
+# It runs as the Cesium Agent app, with the secret CESIUM_AGENT_PRIVATE_KEY, a
+# private key of the app (as cesium's site.yml); without it, it says so and
+# does nothing.
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: roadmap-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: The secret is set
+        id: key
+        env:
+          KEY: ${{ secrets.CESIUM_AGENT_PRIVATE_KEY }}
+        run: |
+          if [ -n "$KEY" ]; then echo "set=true" >> "$GITHUB_OUTPUT"
+          else echo "::notice::the secret CESIUM_AGENT_PRIVATE_KEY is not set: nothing is synced"; fi
+
+      - uses: actions/checkout@v7
+        if: steps.key.outputs.set == 'true'
+
+      - name: The app's token
+        id: token
+        if: steps.key.outputs.set == 'true'
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: Iv23liXrtnf12IOEFv6c
+          private-key: ${{ secrets.CESIUM_AGENT_PRIVATE_KEY }}
+          owner: cesiumlang
+
+      - name: Status, both ways
+        if: steps.key.outputs.set == 'true'
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+        run: bash .claude/skills/roadmap-project/scripts/status-sync.sh cesiumlang cesiumlang
+
+      - name: Next action and the agent label
+        if: steps.key.outputs.set == 'true'
+        env:
+          GH_TOKEN: ${{ steps.token.outputs.token }}
+        run: bash .claude/skills/roadmap-project/scripts/next-action.sh cesiumlang cesiumlang
