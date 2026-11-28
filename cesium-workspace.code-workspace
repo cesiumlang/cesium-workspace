@@ -21,9 +21,6 @@
   //   vscode-cesium/vscode-cesium.code-workspace
   // A setting added to one of those belongs here too.
   "settings": {
-    // breakpoints in .csm files without vscode-cesium 0.1.3 installed, which
-    // allows them (cesiumlang/vscode-cesium#48); remove once it is
-    "debug.allowBreakpointsEverywhere": true,
     "files.associations": {
       // Cesium source and module interface files (cesiumlang/cesium#14)
       "*.csm": "cesium",
