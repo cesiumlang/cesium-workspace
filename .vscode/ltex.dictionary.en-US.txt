@@ -258,3 +258,5 @@ spctl
 uuidgen
 vcvars
 vswhere
+
+globals
