@@ -22,6 +22,7 @@ description: Keep the Cesium Roadmap GitHub Project in order - add a newly filed
 - **A milestone holds only what its release needs.** A design or question issue, and a proposal's pull request, goes in the milestone of the first release that depends on its answer. Work with no release planned goes in `backlog`. A repository may plan several releases ahead, so that a feature needed sooner ships before later work that builds on it.
 - **cesium's milestones:** v0.1.0, `cesium0` and `cesium1` as they are, signed; v0.2.0, S0 complete; v0.3.0, S1; v0.4.0, the real compiler; `backlog`.
 - **The rows are in milestone order,** the earliest release first; within a release, in the order the work and emanspeaks's answers unblock each other. A release is ready when its milestone has no open issue, not when its CI is green.
+- **Every open blocker is above what it blocks** (emanspeaks, 2026-11-27): the board is the order in which the work is done, so a question for emanspeaks that holds up a row stands above that row. Record every real dependency as a "blocked by" link, then run `scripts/order.sh apply`, which moves each open blocker up above the first row it blocks and keeps the order otherwise (run without `apply` to see what would move). Run it after adding links or rows.
 
 ## Status, both ways (emanspeaks, 2026-11-27)
 
